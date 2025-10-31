@@ -31,7 +31,7 @@
             text-align: center;
             color: #111827;
             margin-bottom: 10px;
-            font-size: 2.2em;
+            font-size: 2em;
             font-weight: 700;
         }
         
@@ -39,7 +39,7 @@
             text-align: center;
             color: #6b7280;
             margin-bottom: 30px;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
         
         .rates-grid {
@@ -65,20 +65,20 @@
         
         .rate-card h3 {
             color: #1f2937;
-            font-size: 1.05em;
+            font-size: 1em;
             margin-bottom: 10px;
             font-weight: 600;
         }
         
         .rate-card .price {
-            font-size: 1.9em;
+            font-size: 1.7em;
             font-weight: 700;
             color: #111827;
         }
         
         .rate-card .unit {
             color: #6b7280;
-            font-size: 0.85em;
+            font-size: 0.8em;
             margin-top: 5px;
         }
         
@@ -111,7 +111,7 @@
             color: #ffffff;
             border: 1px solid #111827;
             border-radius: 12px;
-            font-size: 1em;
+            font-size: 0.95em;
             cursor: pointer;
             transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
@@ -180,20 +180,20 @@
                 border-left: none;
                 border-right: none;
             }
-            h1 { font-size: 1.6em; }
-            .subtitle { font-size: 0.85em; margin-bottom: 20px; }
+            h1 { font-size: 1.45em; }
+            .subtitle { font-size: 0.8em; margin-bottom: 20px; }
             .rates-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 12px; }
             .rate-card { padding: 16px; border-radius: 12px; }
-            .rate-card h3 { font-size: 1em; }
-            .rate-card .price { font-size: 1.6em; }
-            .refresh-btn { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 1em; }
-            .last-updated { font-size: 0.85em; }
+            .rate-card h3 { font-size: 0.95em; }
+            .rate-card .price { font-size: 1.45em; }
+            .refresh-btn { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 0.95em; }
+            .last-updated { font-size: 0.8em; }
         }
 
         /* Narrow devices and compact width */
         @media (max-width: 360px) {
             .rates-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 1.5em; }
+            h1 { font-size: 1.4em; }
         }
     </style>
 </head>
@@ -235,65 +235,74 @@
         
         function displayRates(data) {
             // Adjust this based on your actual API response structure
+            const formatIndianNumber = (value) => {
+                if (value === null || value === undefined || value === '' || value === 'N/A') {
+                    return 'N/A';
+                }
+                const numeric = parseFloat(String(value).replace(/[^0-9.-]/g, ''));
+                if (isNaN(numeric)) return 'N/A';
+                return new Intl.NumberFormat('en-IN').format(numeric);
+            };
+
             const ratesHTML = `
                 <div class="rates-grid">
                     <div class="rate-card">
                         <h3>Gold 999 <span class="session">AM</span></h3>
-                        <div class="price">₹${data.gold_999_am || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_999_am)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
                     <div class="rate-card">
                         <h3>Gold 999 <span class="session">PM</span></h3>
-                        <div class="price">₹${data.gold_999_pm || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_999_pm)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
 
                     <div class="rate-card">
                         <h3>Gold 995 <span class="session">AM</span></h3>
-                        <div class="price">₹${data.gold_995_am || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_995_am)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 995 <span class="session">PM</span></h3>
-                        <div class="price">₹${data.gold_995_pm || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_995_pm)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 916 <span class="session">AM</span></h3>
-                        <div class="price">₹${data.gold_916_am || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_916_am)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 916 <span class="session">PM</span></h3>
-                        <div class="price">₹${data.gold_916_pm || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_916_pm)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 750 <span class="session">AM</span></h3>
-                        <div class="price">₹${data.gold_750_am || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_750_am)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 750 <span class="session">PM</span></h3>
-                        <div class="price">₹${data.gold_750_pm || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_750_pm)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 585 <span class="session">AM</span></h3>
-                        <div class="price">₹${data.gold_585_am || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_585_am)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
 
                     <div class="rate-card">
                         <h3>Gold 585 <span class="session">PM</span></h3>
-                        <div class="price">₹${data.gold_585_pm || 'N/A'}</div>
+                        <div class="price">₹${formatIndianNumber(data.gold_585_pm)}</div>
                         <div class="unit">per 10 grams</div>
                     </div>
                     
