@@ -9,7 +9,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #fafafa 0%, #f3f4f6 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -18,26 +18,28 @@
         }
         
         .container {
-            background: white;
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             padding: 40px;
             max-width: 800px;
             width: 100%;
+            border: 1px solid #e5e7eb;
         }
         
         h1 {
             text-align: center;
-            color: #333;
+            color: #111827;
             margin-bottom: 10px;
-            font-size: 2.5em;
+            font-size: 2.2em;
+            font-weight: 700;
         }
         
         .subtitle {
             text-align: center;
-            color: #666;
+            color: #6b7280;
             margin-bottom: 30px;
-            font-size: 0.9em;
+            font-size: 0.95em;
         }
         
         .rates-grid {
@@ -48,12 +50,13 @@
         }
         
         .rate-card {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
             border-radius: 15px;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e5e7eb;
         }
         
         .rate-card:hover {
@@ -61,40 +64,41 @@
         }
         
         .rate-card h3 {
-            color: #333;
-            font-size: 1.1em;
+            color: #1f2937;
+            font-size: 1.05em;
             margin-bottom: 10px;
+            font-weight: 600;
         }
         
         .rate-card .price {
-            font-size: 2em;
-            font-weight: bold;
-            color: #1a1a1a;
+            font-size: 1.9em;
+            font-weight: 700;
+            color: #111827;
         }
         
         .rate-card .unit {
-            color: #555;
-            font-size: 0.8em;
+            color: #6b7280;
+            font-size: 0.85em;
             margin-top: 5px;
         }
         
         .loading {
             text-align: center;
             padding: 40px;
-            color: #667eea;
-            font-size: 1.2em;
+            color: #4b5563;
+            font-size: 1.1em;
         }
         
         .error {
             text-align: center;
             padding: 40px;
-            color: #e74c3c;
-            font-size: 1.1em;
+            color: #374151;
+            font-size: 1.05em;
         }
         
         .last-updated {
             text-align: center;
-            color: #888;
+            color: #6b7280;
             font-size: 0.9em;
             margin-top: 20px;
         }
@@ -103,39 +107,106 @@
             display: block;
             margin: 20px auto 0;
             padding: 12px 30px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 25px;
+            background: #111827;
+            color: #ffffff;
+            border: 1px solid #111827;
+            border-radius: 12px;
             font-size: 1em;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         
         .refresh-btn:hover {
-            background: #5568d3;
+            background: #1f2937;
+            border-color: #1f2937;
         }
         
         .session {
             display: inline-block;
-            padding: 5px 15px;
-            background: #f0f0f0;
-            border-radius: 20px;
-            font-size: 0.85em;
+            padding: 5px 12px;
+            background: #eef2f7;
+            border-radius: 999px;
+            font-size: 0.8em;
             margin: 5px;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Improve mobile experience */
+        :root {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        /* Remove tap highlight on mobile */
+        body {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            padding-left: max(20px, env(safe-area-inset-left));
+            padding-right: max(20px, env(safe-area-inset-right));
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+        }
+
+        /* Respect reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .rate-card:hover {
+                transform: none;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            body { 
+                padding: 0; 
+                padding-left: env(safe-area-inset-left); 
+                padding-right: env(safe-area-inset-right); 
+                padding-top: env(safe-area-inset-top); 
+                padding-bottom: env(safe-area-inset-bottom);
+                /* background-color: #ffffff; */
+            }
+            .container { 
+                padding: 20px; 
+                border-radius: 0; 
+                max-width: 100%; 
+                width: 100vw; 
+                margin: 0;
+                box-shadow: none;
+                border-left: none;
+                border-right: none;
+            }
+            h1 { font-size: 1.6em; }
+            .subtitle { font-size: 0.85em; margin-bottom: 20px; }
+            .rates-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 12px; }
+            .rate-card { padding: 16px; border-radius: 12px; }
+            .rate-card h3 { font-size: 1em; }
+            .rate-card .price { font-size: 1.6em; }
+            .refresh-btn { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 1em; }
+            .last-updated { font-size: 0.85em; }
+        }
+
+        /* Narrow devices and compact width */
+        @media (max-width: 360px) {
+            .rates-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.5em; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏆 Live Gold Rates</h1>
+        <h1>Live Gold Rates</h1>
         <p class="subtitle">IBJA Benchmark Rates</p>
         
         <div id="rates-container">
             <div class="loading">Loading rates...</div>
         </div>
         
-        <button class="refresh-btn" onclick="fetchRates()">🔄 Refresh Rates</button>
+        <button class="refresh-btn" onclick="fetchRates()">Refresh Rates</button>
         
         <div class="last-updated" id="last-updated"></div>
     </div>
